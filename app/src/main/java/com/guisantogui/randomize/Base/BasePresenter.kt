@@ -1,4 +1,4 @@
-package com.guisantogui.randomizer
+package com.guisantogui.randomize.Base
 
 interface BasePresenter {
 

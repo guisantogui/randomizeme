@@ -2,12 +2,21 @@
 
 buildscript {
     ext.kotlin_version = '1.1.4-3'
+    ext.publisher = '1.2.0'
+    ext.realmVersion = '4.1.1'
     repositories {
         jcenter()
+        mavenCentral()
+        maven {
+            url 'https://maven.google.com/'
+            name 'Google'
+        }
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:2.3.3'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+        classpath "com.github.triplet.gradle:play-publisher:$publisher"
+        classpath "io.realm:realm-gradle-plugin:$realmVersion"
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -22,4 +31,17 @@ allprojects {
 
 task clean(type: Delete) {
     delete rootProject.buildDir
+}
+
+ext {
+    // App dependencies
+    supportLibraryVersion = '25.4.0'
+    junitVersion = '4.12'
+    mockitoVersion = '1.10.19'
+    powerMockito = '1.6.2'
+    hamcrestVersion = '1.3'
+    runnerVersion = '0.5'
+    rulesVersion = '0.5'
+    espressoVersion = '2.2.2'
+    realmVersion = '4.1.1'
 }

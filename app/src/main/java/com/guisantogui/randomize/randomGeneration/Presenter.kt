@@ -1,36 +1,36 @@
-package com.guisantogui.randomizer
+package com.guisantogui.randomize.randomGeneration
 
 import java.util.*
 
-class RandomizePresenter(contract: RandomizeViewContract) : RandomizePresenterContract {
+class Presenter(contract: RandomizeContract.View) : RandomizeContract.Presenter {
 
-    val mRandomizeView: RandomizeViewContract = contract
+    val mRandomizeView: RandomizeContract.View = contract
 
-    override fun generate(){
-        var text: String
+    override fun handleNumberToScreen(isOrdinal: Boolean): String{
         val generated = randomize()
-        text = if(isOrdinal()){
-                   val ordinal = generateOrdinalFor(generated)
-
+        return if(isOrdinal){
+                   val ordinal = generateOrdinalFor(generated.number)
                    "$generated$ordinal"
                }
-               else{
-                   generated.toString()
+               else {
+                   generated.number.toString()
                }
+    }
 
+    override fun printToScreen(text: String){
         mRandomizeView.showNumber(text)
     }
 
     override fun start() {
-        generate()
+        handleNumberToScreen(isOrdinal())
     }
 
-    override fun randomize(): Int {
-        return Random().nextInt(100)
+    override fun randomize(): RandomNumber {
+        return RandomNumber(Random().nextInt(100))
     }
 
     override fun isOrdinal(): Boolean {
-        return Random().nextInt(2) % 2 == 0
+        return Random().nextInt(1) == 0
     }
 
     init {
