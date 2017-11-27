@@ -21,7 +21,7 @@ import org.junit.Rule
 class RandomScreenTest {
 
     @get:Rule
-    public var mRandomize: ActivityTestRule<RandomizeActivity>
+    var mRandomize: ActivityTestRule<RandomizeActivity>
                             = ActivityTestRule(RandomizeActivity::class.java)
 
     @Test

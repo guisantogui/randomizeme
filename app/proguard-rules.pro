@@ -23,4 +23,5 @@
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
 #-renamesourcefileattribute SourceFile
--printusage usage.txt
+-printusage usage.text
+-dontwarn com.google.**

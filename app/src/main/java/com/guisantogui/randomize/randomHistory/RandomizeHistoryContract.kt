@@ -9,6 +9,9 @@ class RandomizeHistoryContract {
         fun clearHistory()
 
         fun showHistory()
+
+        fun isActive(): Boolean
+
     }
 
 

@@ -1,13 +1,27 @@
 package com.guisantogui.randomize.randomHistory
 
+import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
-import android.support.design.widget.Snackbar
-import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.View
 import com.guisantogui.randomize.R
+import com.google.android.gms.tasks.OnFailureListener
+import com.google.firebase.dynamiclinks.FirebaseDynamicLinks
+import com.guisantogui.randomize.Base.AbstractTrackedClick
+import com.guisantogui.randomize.Base.BaseActivity
+import com.guisantogui.randomize.MakingPathActivity
+import com.guisantogui.randomize.randomGeneration.RandomizeActivity
 import kotlinx.android.synthetic.main.activity_randomize_history.*
+import kotlinx.android.synthetic.main.content_randomize_history.*
 
-class RandomizeHistoryActivity : AppCompatActivity() {
+
+class RandomizeHistoryActivity : BaseActivity() {
+
+
+    override fun getActivityName(): String {
+        return RandomizeHistoryActivity::class.java.simpleName
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -16,19 +30,43 @@ class RandomizeHistoryActivity : AppCompatActivity() {
         val action = intent.action
         val uri = intent.data
 
+        FirebaseDynamicLinks.getInstance()
+                .getDynamicLink(intent)
+                .addOnSuccessListener(this, { pendingDynamicLinkData ->
+                                        // Get deep link from result (may be null if no link is found)
+                        var deepLink: Uri? = null
+                        if (pendingDynamicLinkData != null) {
+                            deepLink = pendingDynamicLinkData.link
+
+                         //   Log.d("TAG", "pendingDynamicLinkData: "+deepLink)
+                        }
+
+                        })
+
+                .addOnFailureListener(this, OnFailureListener
+                        { e -> Log.w("TAG", "getDynamicLink:onFailure", e) }
+                )
+
+        Log.d("TAG", "EXECUTANDO")
+
         if(intent.data != null){
-            Log.d("TAG", uri.toString())
+            Log.d("TAG", "QUERY "+ uri)
+
+            my_fucking_custom_parameter.text = uri.query
         }
         else {
-            Log.d("TAG", "NULL URI")
+        //    Log.d("TAG", "NULL URI")
         }
 
-        Log.d("TAG", action)
 
-        fab.setOnClickListener { view ->
-            Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                    .setAction("Action", null).show()
-        }
+        fab.setOnClickListener(object: AbstractTrackedClick("FAB_HISTO", this, null){
+            override fun onClick(v: View) {
+                super.onClick(v)
+
+                val intent = Intent(context, MakingPathActivity::class.java)
+                startActivity(intent)
+            }
+        })
     }
 
 }

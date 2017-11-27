@@ -1,6 +1,6 @@
 package com.guisantogui.randomize
 
-import com.guisantogui.randomize.randomGeneration.Presenter
+import com.guisantogui.randomize.randomGeneration.RandomizePresenter
 import com.guisantogui.randomize.randomGeneration.RandomizeContract
 import org.hamcrest.CoreMatchers.*
 import org.hamcrest.MatcherAssert.assertThat
@@ -34,15 +34,26 @@ class RandomizePresenterTest {
 
     @Test
     fun randomizeTest() {
-        presenter = Presenter(view)
+        presenter = RandomizePresenter(view)
 
         assertThat(presenter.randomize().number, `is`(greaterThan(-1)))
         assertThat(presenter.randomize().number, `is`(lessThan(101)))
     }
 
+
+    @Test
+    fun handleNumberToScreen(){
+        presenter = RandomizePresenter(view)
+
+        val number = presenter.handleNumberToScreen(false)
+        val casted = number.toInt()
+
+        assertThat(casted, `is`(greaterThan(-1)))
+    }
+
     @Test
     fun generateOrdinalForIntTest() {
-        presenter = Presenter(view)
+        presenter = RandomizePresenter(view)
 
         assertThat(presenter.generateOrdinalFor(1), `is`("st"))
         assertThat(presenter.generateOrdinalFor(2), `is`("nd"))
@@ -56,7 +67,7 @@ class RandomizePresenterTest {
 
     @Test
     fun isOrdinalTest(){
-        presenter = Presenter(view)
+        presenter = RandomizePresenter(view)
 
         assertThat(presenter.isOrdinal(), `is`(notNullValue()))
     }

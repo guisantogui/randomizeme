@@ -2,18 +2,18 @@ package com.guisantogui.randomize.randomGeneration
 
 import java.util.*
 
-class Presenter(contract: RandomizeContract.View) : RandomizeContract.Presenter {
+class RandomizePresenter(contract: RandomizeContract.View) : RandomizeContract.Presenter {
 
     val mRandomizeView: RandomizeContract.View = contract
 
     override fun handleNumberToScreen(isOrdinal: Boolean): String{
-        val generated = randomize()
+        val generated = randomize().number
         return if(isOrdinal){
-                   val ordinal = generateOrdinalFor(generated.number)
+                   val ordinal = generateOrdinalFor(generated)
                    "$generated$ordinal"
                }
                else {
-                   generated.number.toString()
+                   generated.toString()
                }
     }
 
@@ -22,7 +22,7 @@ class Presenter(contract: RandomizeContract.View) : RandomizeContract.Presenter 
     }
 
     override fun start() {
-        handleNumberToScreen(isOrdinal())
+        printToScreen(handleNumberToScreen(isOrdinal()))
     }
 
     override fun randomize(): RandomNumber {
@@ -30,7 +30,7 @@ class Presenter(contract: RandomizeContract.View) : RandomizeContract.Presenter 
     }
 
     override fun isOrdinal(): Boolean {
-        return Random().nextInt(1) == 0
+        return Random().nextInt(2) == 0
     }
 
     init {

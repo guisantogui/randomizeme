@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "618226858077",
+    "firebase_url": "https://com-guisantogui-randomize.firebaseio.com",
+    "project_id": "com-guisantogui-randomize",
+    "storage_bucket": "com-guisantogui-randomize.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:618226858077:android:47cc72e6012cdabd",
+        "android_client_info": {
+          "package_name": "com.guisantogui.randomize"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "618226858077-3t58hkf9uleagbgu0tr4c5njd1dpang2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA6rg154dun98dsx3bbiwjr4U7gypbZHn0"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
